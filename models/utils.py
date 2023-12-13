@@ -47,6 +47,8 @@ def remove_if_exist(df):
         "North",
         "Eilat",
         "South",
+        "rain-2days",
+        "month",
     ]
     cols_to_remove = [col for col in to_remove if col in df.columns]
     # Remove columns from the DataFrame
