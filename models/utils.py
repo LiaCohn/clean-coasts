@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def remove_high_corr(df, target="test_result", threshold=0.6):
+def remove_high_corr(df, target="test_result_num", threshold=0.6):
     """
     return dataframe without corrlation that can be drop.
 
@@ -13,7 +13,7 @@ def remove_high_corr(df, target="test_result", threshold=0.6):
     target_col = df.pop(target)
     df.insert(len(df.columns), target, target_col)
     cor_matrix = df.corr().abs()
-    corr_df = cor_matrix.where(np.triu(np.ones(cor_matrix.shape), k=1).astype(np.bool))
+    corr_df = cor_matrix.where(np.triu(np.ones(cor_matrix.shape), k=1).astype(bool))
 
     cols = corr_df.columns.to_list()
     list_corr_not_empty = []
@@ -49,6 +49,7 @@ def remove_if_exist(df):
         "South",
         "rain-2days",
         "month",
+        "Unnamed: 0",
     ]
     cols_to_remove = [col for col in to_remove if col in df.columns]
     # Remove columns from the DataFrame
