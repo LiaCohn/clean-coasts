@@ -32,7 +32,16 @@ def remove_high_corr(df, target="test_result_num", threshold=0.6):
 
     stay = [max(sub, key=Key) for sub in list_corr_not_empty]
     drops = [c for sub in list_corr_not_empty for c in sub if c not in stay]
-    return df.drop(list(set(drops)), axis=1)
+    # distance_to_ashdod_port -> hifa_port_dis. city_jinny_ranking -> city rank
+    cols = list(set(drops))
+    if "hifa_port_dis" in cols:
+        cols.remove("hifa_port_dis")
+        cols.append("distance_to_ashdod_port")
+    if "city rank" in cols:
+        cols.remove("city rank")
+        cols.append("city_jinny_ranking")
+    cols = list(set(cols))
+    return df.drop((cols), axis=1)
 
 
 def remove_if_exist(df):
